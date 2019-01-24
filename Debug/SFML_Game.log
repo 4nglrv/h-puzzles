@@ -1,0 +1,29 @@
+﻿  SFML_Game.cpp
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(27): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(45): warning C4244: аргумент: преобразование "size_t" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(64): warning C4244: аргумент: преобразование "size_t" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(72): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(73): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(87): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(88): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(102): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(131): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(283): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(285): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(298): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(300): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(310): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(354): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(356): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(366): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(384): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(391): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(399): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(412): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(415): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(424): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(433): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(442): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(451): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\documents\visual studio 2015\projects\sfml_game\sfml_game.cpp(460): warning C4018: <: несоответствие типов со знаком и без знака
+  SFML_Game.vcxproj -> C:\Users\User\Documents\Visual Studio 2015\Projects\SFML_Game\Debug\SFML_Game.exe

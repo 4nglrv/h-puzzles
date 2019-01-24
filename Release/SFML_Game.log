@@ -1,0 +1,9 @@
+﻿  SFML_Game.cpp
+SFML_Game.cpp(46): warning C4244: аргумент: преобразование "size_t" в "float", возможна потеря данных
+SFML_Game.cpp(74): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода
+  158 of 184 functions (85.9%) were compiled, the rest were copied from previous compilation.
+    157 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  SFML_Game.vcxproj -> C:\Users\User\Documents\Visual Studio 2015\Projects\SFML_Game\Release\SFML_Game.exe
