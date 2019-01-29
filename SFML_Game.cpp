@@ -30,11 +30,11 @@ void clearObjects(vector <Object>& sprites) //очистка текстур и спрайтов из памя
 	sprites.clear();
 } 
 
-void outSprites3x3(vector <Object>& sprites, int l){  //создание спрайтов и запихуяривание их в вектор
+void outSprites(vector <Object>& sprites, int l, int u){  //создание спрайтов и запихуяривание их в вектор; l - папка; u - "3" - 3х3, "4" - 4x4
 	sprites.clear();
-	for (size_t i = 0; i < 3; i++) // 102x129
+	for (size_t i = 0; i < u; i++) // 102x129
 	{
-		for (size_t j = 0; j < 3; j++)
+		for (size_t j = 0; j < u; j++)
 		{
 			char base_name[512] = {};
 			sprintf_s(base_name, "pictures/puzzles/%i/0%i.jpg", l, sprites.size()); //приваиваем к base_name пусть к текстуре
@@ -42,52 +42,25 @@ void outSprites3x3(vector <Object>& sprites, int l){  //создание спрайтов и запи
 			kTemp.ktexture = new Texture; //указатель
 			kTemp.ktexture->loadFromFile(base_name); //загружаем текстуру указанную в base_name		"->" - указатель
 			kTemp.kSprite.setTexture(*kTemp.ktexture); //загрузаем текстуру в спрайт
-			kTemp.kSprite.setPosition((j * kTemp.ktexture->getSize().x) + 100, (i * kTemp.ktexture->getSize().y) + 101);
+			int y; if (u > 3) {
+				y = 100;
+			}
+			else
+			{
+				y = 101;
+			}
+			kTemp.kSprite.setPosition((j * kTemp.ktexture->getSize().x) + 100, (i * kTemp.ktexture->getSize().y) + y);
 			kTemp.id = sprites.size(); //задаем айди спрайтам
 			sprites.push_back(kTemp); //запихуяриваем спрайты в вектор
 		}
 	}
 }
 
-void outSprites4x4(vector <Object>& sprites, int l) {  //создание спрайтов и запихуяривание их в вектор
-	sprites.clear();
-	for (size_t i = 0; i < 4; i++) // 102x129
-	{
-		for (size_t j = 0; j < 4; j++)
-		{
-			char base_name[512] = {};
-			sprintf_s(base_name, "pictures/puzzles/%i/0%i.jpg", l, sprites.size()); //приваиваем к base_name пусть к текстуре
-			Object kTemp;
-			kTemp.ktexture = new Texture; //указатель
-			kTemp.ktexture->loadFromFile(base_name); //загружаем текстуру указанную в base_name		"->" - указатель
-			kTemp.kSprite.setTexture(*kTemp.ktexture); //загрузаем текстуру в спрайт
-			kTemp.kSprite.setPosition((j * kTemp.ktexture->getSize().x) + 100, (i * kTemp.ktexture->getSize().y) + 100);
-			kTemp.id = sprites.size(); //задаем айди спрайтам
-			sprites.push_back(kTemp); //запихуяриваем спрайты в вектор
-		}
-	}
-}
-
-void mix3(vector <Object>& sprites) { //с помощью &(оперсанда) мы можем поменять передаваемое значение во всей программе
+void mix(vector <Object>& sprites, int col) { //с помощью &(оперсанда) мы можем поменять передаваемое значение во всей программе
 	srand(time(NULL)); 
 	for (int i = 0; i < sprites.size()-1; i++)// -1 для того чтобы мы меняли пазлы попарно
 	{
-		Vector2i rnd(rand() % 9 + 0, rand() % 9 + 0);
-		Vector2f vec1 = sprites[rnd.x].kSprite.getPosition();
-		Vector2f vec2 = sprites[rnd.y].kSprite.getPosition();
-		sprites[rnd.x].kSprite.setPosition(vec2);
-		sprites[rnd.y].kSprite.setPosition(vec1);
-		swap(sprites[rnd.x], sprites[rnd.y]);
-
-	}
-
-}
-
-void mix4(vector <Object>& sprites) { //с помощью &(оперсанда) мы можем поменять передаваемое значение во всей программе
-	srand(time(NULL));
-	for (int i = 0; i < sprites.size() - 1; i++)// -1 для того чтобы мы меняли пазлы попарно
-	{
-		Vector2i rnd(rand() % 16 + 0, rand() % 16 + 0);
+		Vector2i rnd(rand() % col + 0, rand() % col + 0);
 		Vector2f vec1 = sprites[rnd.x].kSprite.getPosition();
 		Vector2f vec2 = sprites[rnd.y].kSprite.getPosition();
 		sprites[rnd.x].kSprite.setPosition(vec2);
@@ -101,7 +74,7 @@ void mix4(vector <Object>& sprites) { //с помощью &(оперсанда) мы можем поменять
 bool check(vector <Object> sprites) {
 	for (int i = 0; i < sprites.size(); i++) {
 		if (sprites[i].id != i)
-			return false;
+		return false;
 	}
 	return true;
 }
@@ -169,23 +142,33 @@ void button(vector <Object>& buttons) {
 		kButton.kSprite.setTexture(*kButton.ktexture);
 		if (i == 0) {
 			kButton.kSprite.setPosition(5, 540);
+			kButton.type = ("exit");
 		}
-		if (i == 1 || i == 3) {
+		if (i == 1) {
 			kButton.kSprite.setPosition(26, 271);
+			kButton.type = ("left");
 		}
-		if (i == 2 || i == 4) {
+		if (i == 2) {
 			kButton.kSprite.setPosition(419, 271);
+			kButton.type = ("right");
+		}
+		if (i == 3) {
+			kButton.kSprite.setPosition(26, 271);
+			kButton.type = ("offleft");
+		}
+		if (i == 4) {
+			kButton.kSprite.setPosition(419, 271);
+			kButton.type = ("offright");
 		}
 		kButton.id = buttons.size();
 		buttons.push_back(kButton);
 	}
-
 }
 
-void startMenu(vector <Object>& sMenu) {
+void startMenu(vector <Object>& sMenu, int lev) {
 	sMenu.clear();
 	int levelpos = 0;
-	for (size_t i = 0; i < 8; i++)
+	for (size_t i = 0; i < lev; i++)
 	{
 		char base_name[512] = {};
 		sprintf_s(base_name, "pictures/materials/startMenu/0%i.jpg", sMenu.size());
@@ -209,11 +192,7 @@ void startMenu(vector <Object>& sMenu) {
 			}break;
 			case 3:
 			{
-				//kStart.ktexture->loadFromFile("pictures\materials\startMenu\empty.png");
 				kStart.kSprite.setPosition(299, 44);
-				if (levelpos > 1) {
-					
-				}
 			}break;
 			case 4:
 			{
@@ -235,6 +214,20 @@ void startMenu(vector <Object>& sMenu) {
 		}//else
 		sMenu.push_back(kStart);
 	}//for
+}
+
+void music() {
+	for (int i = 0; i < 1; i++)
+	{
+		char base_name[512] = {};
+		sprintf_s(base_name, "pictures/materials/startMenu/0%i.jpg", i);
+		Object volume;
+		volume.ktexture = new Texture;
+		volume.ktexture->loadFromFile(base_name);
+		volume.kSprite.setTexture(*volume.ktexture);
+		volume.kSprite.setPosition(440, 540);
+	}
+
 }
 
 int main()
@@ -261,12 +254,12 @@ int main()
 	int iTemp = -1;
 	bool wl = false; //проверка
 	int location = 0; //-1 or 0 - mainMenu; 1 - startMenu; 2 - aboutMenu; 3 - exit; 4 - 1 level; 5 - 2 level
+	int level = 3;
+	int checkwin = 0;
 
 	vector<Object> sprites;
 	vector<Object> buttons;
 
-	if (location == 4){ //в зависимости от нажатого спрайта вывести нунжую функцию
-	}
 	while (kWnd.isOpen())
 	{
 		Event event;
@@ -279,7 +272,7 @@ int main()
 			else if (event.type == Event::MouseButtonPressed)
 			{
 				//mainMenu
-				if(Menu.size() == 2){
+				if(Menu.size() == 2 || numCase == 0){
 				for (int i = 0; i < Menu.size(); i++){
 					if (Mouse::isButtonPressed(Mouse::Left) &&
 						Menu[i].kSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && Menu[i].type == "button")
@@ -293,6 +286,18 @@ int main()
 					}
 				}
 			}//if
+				//buttons
+				else if (location > 3) {
+					for (int i = 0; i < buttons.size(); i++) {
+						if (Mouse::isButtonPressed(Mouse::Left) &&
+							buttons[i].kSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+						{
+							if (buttons[i].type == "exit") {
+								location = 1;
+							}
+						}//if button pressed
+					}//for
+				}//else
 				//startMenu
 				else{
 				for (int i = 0; i < Menu.size(); i++) {
@@ -310,40 +315,41 @@ int main()
 						Menu[i].kSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && Menu[i].type == "levels")
 					{
 						if (numCase == 1 && i == 2) {
-							int a = 1;
+							int a = 1; int b = 9; int c = 3;
 							location = 4; //1 уровень
-							outSprites3x3(sprites, a);
-							mix3(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
 						}
 						else if (numCase == 1 && i == 3) {
-							int a = 2;
+							int a = 2; int b = 16; int c = 4;
 							location = 5; //2 уровень
-							outSprites4x4(sprites, a);
-							mix4(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
+							wl = false;
 						}
 						else if (numCase == 1 && i == 4) {
-							int a = 3;
+							int a = 3; int b = 16; int c = 4;
 							location = 6; //3 уровень
-							outSprites3x3(sprites, a);
-							mix3(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
 						}
 						else if (numCase == 1 && i == 5) {
-							int a = 4;
+							int a = 4; int b = 9; int c = 3;
 							location = 7; //4 уровень
-							outSprites3x3(sprites, a);
-							mix3(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
 						}
 						else if (numCase == 1 && i == 6) {
-							int a = 5;
+							int a = 5; int b = 16; int c = 4;
 							location = 8; //5 уровень
-							outSprites4x4(sprites, a);
-							mix4(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
 						}
 						else if (numCase == 1 && i == 7) {
-							int a = 6;
+							int a = 6; int b = 16; int c = 4;
 							location = 9; //6 уровень
-							outSprites4x4(sprites, a);
-							mix4(sprites);
+							outSprites(sprites, a, c);
+							mix(sprites, b);
 						}
 					}
 				}//for
@@ -387,7 +393,7 @@ int main()
 			case 1: { //startMenu
 				numCase = location;
 				clearObjects(Menu);
-				startMenu(Menu);
+				startMenu(Menu, level);
 				for (int i = 0; i < Menu.size(); i++) {
 					kWnd.draw(Menu[i].kSprite);
 				}
@@ -406,67 +412,97 @@ int main()
 					}break;
 			case 4: {
 				numCase = location; //1 lev
-				clearObjects(Menu);
+				clearObjects(Menu); clearObjects(buttons);
 				kWnd.draw(BackGround3.kSprite);
 				button(buttons);
+				if (check(sprites) == true && wl == false) { //при каждом прохождении пазлов в startmenu выводится на 1 спрайт больше
+					level++;
+					wl = true;
+				}
 				for (int i = 0; i < buttons.size(); i++) {
 					kWnd.draw(buttons[i].kSprite);
-				};
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 			case 5: {
 				numCase = location; //2 lev
-				clearObjects(Menu);
+				clearObjects(Menu); clearObjects(buttons);
 				kWnd.draw(BackGround4.kSprite);
-				//outSprites4x4(sprites);
+				button(buttons);
+				if (check(sprites) == true && wl == false) { //при каждом прохождении пазлов в startmenu выводится на 1 спрайт больше
+					level++;
+					wl = true;
+				}
+				for (int i = 0; i < buttons.size(); i++) {
+					kWnd.draw(buttons[i].kSprite);
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 			case 6: {
 				numCase = location; //3 lev
-				clearObjects(Menu);
-				kWnd.draw(BackGround3.kSprite);
-				//outSprites4x4(sprites);
+				clearObjects(Menu); clearObjects(buttons);
+				kWnd.draw(BackGround4.kSprite);
+				button(buttons);
+				if (check(sprites) == true && wl == false) { //при каждом прохождении пазлов в startmenu выводится на 1 спрайт больше
+					level++;
+					wl = true;
+				}
+				for (int i = 0; i < buttons.size(); i++) {
+					kWnd.draw(buttons[i].kSprite);
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 			case 7: {
 				numCase = location; //4 lev
-				clearObjects(Menu);
+				clearObjects(Menu); clearObjects(buttons);
 				kWnd.draw(BackGround3.kSprite);
+				button(buttons);
 				//outSprites4x4(sprites);
+				for (int i = 0; i < buttons.size(); i++) {
+					kWnd.draw(buttons[i].kSprite);
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 			case 8: {
 				numCase = location; //5 lev
-				clearObjects(Menu);
+				clearObjects(Menu); clearObjects(buttons);
 				kWnd.draw(BackGround4.kSprite);
+				button(buttons);
 				//outSprites4x4(sprites);
+				for (int i = 0; i < buttons.size(); i++) {
+					kWnd.draw(buttons[i].kSprite);
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 			case 9: {
 				numCase = location; //6 lev
-				clearObjects(Menu);
+				clearObjects(Menu); clearObjects(buttons);
 				kWnd.draw(BackGround4.kSprite);
+				button(buttons);
 				//outSprites4x4(sprites);
+				for (int i = 0; i < buttons.size(); i++) {
+					kWnd.draw(buttons[i].kSprite);
+				}
 				for (int i = 0; i < sprites.size(); i++) {
 					kWnd.draw(sprites[i].kSprite);
 				}
 			}break;
 		}
 		//проверка
-		if (check(sprites) == true && wl == false) {
-			cout << "SUCCESS!!!!!!!~!!!!!!CTYA TVBLAN SDFJIOEOFJIEW\n"; 
-			wl = true;
-		}
+		//if (check(sprites) == true && wl == false) {
+		//	cout << "SUCCESS!!!!!!!~!!!!!!CTYA TVBLAN SDFJIOEOFJIEW\n"; 
+		//	wl = true;
+		//}
 		kWnd.display();
 	}
 	return 0;
